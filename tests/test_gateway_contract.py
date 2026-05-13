@@ -10,4 +10,5 @@ def test_gateway_returns_response_with_route_reason() -> None:
     gateway = ReliabilityGateway([provider], {"primary": breaker}, ResponseCache(60, 0.5))
     result = gateway.complete("hello world")
     assert result.text
-    assert result.route in {"primary", "fallback", "static_fallback"}
+    assert result.route == "primary:primary"
+    assert result.latency_ms >= 0.0

@@ -21,6 +21,15 @@ class RunMetrics(BaseModel):
     estimated_cost_saved: float = 0.0
     latencies_ms: list[float] = Field(default_factory=list)
     scenarios: dict[str, str] = Field(default_factory=dict)
+    scenario_details: dict[str, dict[str, object]] = Field(default_factory=dict)
+    route_counts: dict[str, int] = Field(default_factory=dict)
+    cache_comparison: dict[str, dict[str, float]] = Field(default_factory=dict)
+    false_hit_count: int = 0
+    false_hit_examples: list[str] = Field(default_factory=list)
+    cache_backend: str = "memory"
+    concurrency: int = 1
+    breaker_stream_event_count: int = 0
+    breaker_stream_examples: list[str] = Field(default_factory=list)
 
     @property
     def availability(self) -> float:
@@ -57,6 +66,15 @@ class RunMetrics(BaseModel):
             "estimated_cost": round(self.estimated_cost, 6),
             "estimated_cost_saved": round(self.estimated_cost_saved, 6),
             "scenarios": self.scenarios,
+            "scenario_details": self.scenario_details,
+            "route_counts": self.route_counts,
+            "cache_comparison": self.cache_comparison,
+            "false_hit_count": self.false_hit_count,
+            "false_hit_examples": self.false_hit_examples,
+            "cache_backend": self.cache_backend,
+            "concurrency": self.concurrency,
+            "breaker_stream_event_count": self.breaker_stream_event_count,
+            "breaker_stream_examples": self.breaker_stream_examples,
         }
 
     def write_json(self, path: str | Path) -> None:

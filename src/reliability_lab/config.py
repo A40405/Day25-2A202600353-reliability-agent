@@ -18,6 +18,12 @@ class CircuitBreakerConfig(BaseModel):
     failure_threshold: int = Field(gt=0)
     reset_timeout_seconds: float = Field(gt=0)
     success_threshold: int = Field(gt=0)
+    backend: str = "memory"
+    redis_url: str = "redis://localhost:6379/0"
+    redis_prefix: str = "rl:cb:"
+    stream_enabled: bool = False
+    stream_prefix: str = "rl:cb:stream:"
+    stream_maxlen: int = Field(default=500, gt=0)
 
 
 class CacheConfig(BaseModel):
@@ -30,6 +36,8 @@ class CacheConfig(BaseModel):
 
 class LoadTestConfig(BaseModel):
     requests: int = Field(gt=0)
+    concurrency: int = Field(default=1, gt=0)
+    random_seed: int = 7
 
 
 class ScenarioConfig(BaseModel):
