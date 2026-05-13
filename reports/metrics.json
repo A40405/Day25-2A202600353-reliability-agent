@@ -1,16 +1,16 @@
 {
   "total_requests": 800,
-  "availability": 0.995,
-  "error_rate": 0.005,
-  "latency_p50_ms": 0.78,
-  "latency_p95_ms": 311.0,
-  "latency_p99_ms": 522.55,
-  "fallback_success_rate": 0.96,
-  "cache_hit_rate": 0.78,
+  "availability": 0.9975,
+  "error_rate": 0.0025,
+  "latency_p50_ms": 3.48,
+  "latency_p95_ms": 330.31,
+  "latency_p99_ms": 568.91,
+  "fallback_success_rate": 0.9785,
+  "cache_hit_rate": 0.7825,
   "circuit_open_count": 2,
-  "recovery_time_ms": 3853.077292442322,
-  "estimated_cost": 0.077464,
-  "estimated_cost_saved": 0.209328,
+  "recovery_time_ms": 3834.14089679718,
+  "estimated_cost": 0.077234,
+  "estimated_cost_saved": 0.210012,
   "scenarios": {
     "primary_timeout_100": "pass",
     "primary_flaky_50": "pass",
@@ -27,7 +27,7 @@
     "primary_flaky_50": {
       "description": "Primary provider fails 50 percent; circuit should oscillate.",
       "expected_behavior": "Primary intermittently fails, circuit opens at least once, fallback absorbs spillover.",
-      "observed_behavior": "availability=98.00%, fallback_success_rate=90.24%, cache_hit_rate=74.00%, circuit_open_count=1, false_hits_blocked=0",
+      "observed_behavior": "availability=99.00%, fallback_success_rate=94.12%, cache_hit_rate=74.00%, circuit_open_count=1, false_hits_blocked=0",
       "status": "pass"
     },
     "cache_stale_candidate": {
@@ -39,36 +39,36 @@
     "all_healthy": {
       "description": "Baseline where both providers are healthy.",
       "expected_behavior": "Requests stay on primary with no circuit openings or static fallbacks.",
-      "observed_behavior": "availability=100.00%, fallback_success_rate=0.00%, cache_hit_rate=72.50%, circuit_open_count=0, false_hits_blocked=0",
+      "observed_behavior": "availability=100.00%, fallback_success_rate=0.00%, cache_hit_rate=73.50%, circuit_open_count=0, false_hits_blocked=0",
       "status": "pass"
     }
   },
   "route_counts": {
-    "fallback:backup:after_primary_error": 17,
-    "cache_hit:1.00": 624,
-    "fallback:backup:after_primary_open": 79,
-    "primary:primary": 76,
-    "static_fallback:all_providers_failed": 4
+    "fallback:backup:after_primary_error": 25,
+    "cache_hit:1.00": 626,
+    "fallback:backup:after_primary_open": 66,
+    "primary:primary": 81,
+    "static_fallback:all_providers_failed": 2
   },
   "cache_comparison": {
     "without_cache": {
-      "latency_p50_ms": 274.77,
-      "latency_p95_ms": 494.73,
-      "estimated_cost": 0.34414,
+      "latency_p50_ms": 285.03,
+      "latency_p95_ms": 503.88,
+      "estimated_cost": 0.35107,
       "cache_hit_rate": 0.0
     },
     "with_cache": {
-      "latency_p50_ms": 0.78,
-      "latency_p95_ms": 311.0,
-      "estimated_cost": 0.077464,
-      "cache_hit_rate": 0.78
+      "latency_p50_ms": 3.48,
+      "latency_p95_ms": 330.31,
+      "estimated_cost": 0.077234,
+      "cache_hit_rate": 0.7825
     }
   },
   "false_hit_count": 7,
   "false_hit_examples": [
-    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7769)",
-    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7769)",
-    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7769)"
+    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7436)",
+    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7436)",
+    "Summarize refund policy for 2026 deadline -> Summarize refund policy for 2024 deadline (0.7436)"
   ],
   "cache_backend": "redis",
   "concurrency": 10,

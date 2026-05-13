@@ -117,7 +117,10 @@ class ResponseCache:
 
     @staticmethod
     def _tokenize(value: str) -> list[str]:
-        return re.findall(r"[a-z0-9]+", value.lower())
+        tokens = re.findall(r"[a-z0-9]+", value.lower())
+        stop_words = {"the", "a", "an", "is", "are", "what", "how", "why", "when", "where", "who", "do", "does", "did", "to", "of", "in", "on", "at", "by", "with", "for"}
+        filtered = [t for t in tokens if t not in stop_words]
+        return filtered if filtered else tokens
 
     @staticmethod
     def _character_ngrams(value: str, n: int = 3) -> set[str]:
